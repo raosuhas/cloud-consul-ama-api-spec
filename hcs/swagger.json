@@ -1,0 +1,469 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HashiCorp Consul Service (HCS)",
+    "description": "Azure Managed App API for HCS",
+    "version": "0.1"
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/notifications/resource": {
+      "post": {
+        "summary": "ResourceNotification is an API endpoint called by Azure to deliver\nnotifications about changes on a managed app instance.",
+        "operationId": "ResourceNotification",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ResourceNotificationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      }
+    },
+    "/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.CustomProviders/resourceProviders/public/consulClusters": {
+      "get": {
+        "summary": "ListClusters is an API endpoint called by Azure to retrieve all Consul\nclusters in a managed app. This is one of the API endpoints required to\nimplement a custom resource provider.",
+        "description": "see https://docs.microsoft.com/en-us/azure/managed-applications/custom-providers-overview",
+        "operationId": "ListClusters",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ListClustersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "description": "subscription_id is the ID of the Azure subscription the Consul clusters\nexist in. This is the customer's subscription ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource_group",
+            "description": "resource_group is the resource group in which the Consul clusters are\nrunning. This is the AMA instance's managed resource group.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      }
+    },
+    "/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.CustomProviders/resourceProviders/public/consulClusters/{name}": {
+      "get": {
+        "summary": "GetCluster is an API endpoint called by Azure to retrieve the details of\na Consul cluster. This is one of the API endpoints required to implement\na custom resource provider.",
+        "description": "see https://docs.microsoft.com/en-us/azure/managed-applications/custom-providers-overview",
+        "operationId": "GetCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.GetClusterResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "description": "subscription_id is the ID of the Azure subscription the Consul cluster\nexists in. This is the customer's subscription ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource_group",
+            "description": "resource_group is the resource group in which the Consul cluster is\nrunning. This is the AMA instance's managed resource group.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "name is the resource name of the Consul cluster resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      },
+      "delete": {
+        "summary": "DeleteCluster is an API endpoint called by Azure to remove a Consul\ncluster. This is one of the API endpoints required to implement a custom\nresource provider.",
+        "description": "see https://docs.microsoft.com/en-us/azure/managed-applications/custom-providers-overview",
+        "operationId": "DeleteCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "description": "subscription_id is the ID of the Azure subscription the Consul cluster\nexists in. This is the customer's subscription ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource_group",
+            "description": "resource_group is the resource group in which the Consul cluster is\nrunning. This is the AMA instance's managed resource group.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "name is the resource name of the Consul cluster resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      },
+      "put": {
+        "summary": "CreateCluster is an API endpoint called when there is a PUT request to\nAzure Resource Manager on one of the custom resources of type\n\"consulClusters\". This is one of the API endpoints required to implement\na custom resource provider.",
+        "description": "see https://docs.microsoft.com/en-us/azure/managed-applications/custom-providers-overview",
+        "operationId": "CreateCluster",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.CreateClusterResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "description": "subscription_id is the ID of the Azure subscription the new Consul\ncluster should be created in. This is the customer's subscription ID.\nPassed in the request path.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource_group",
+            "description": "resource_group is the resource group in which the new Consul cluster\nshould be created. This is the AMA instance's managed resource group.\nPassed in the request path.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "name is the resource name of the new Consul cluster resource.\nPassed in the request path and in the request body.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.CreateClusterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      }
+    },
+    "/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.CustomProviders/resourceProviders/public/consulClusters/{name}/creation": {
+      "get": {
+        "summary": "TrackClusterCreation is an API endpoint called by Azure after requesting\nthe creation of a new Consul cluster (see CreateCluster) to determine\nthe status of the create operation.\nThis URI of this endpoint is returned with the CreateClusterResponse.\nBased on the status of the operation creating the HVN and cluster, this\nendpoint needs to return HTTP 202 to indicate that the operation is still\nrunning or HTTP 200 if it is done.",
+        "operationId": "TrackClusterCreation",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.TrackClusterCreationResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "subscription_id",
+            "description": "subscription_id is the ID of the Azure subscription the Consul cluster\nexists in. This is the customer's subscription ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource_group",
+            "description": "resource_group is the resource group into which the Consul cluster is\nbeing deployed. This is the AMA instance's managed resource group.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "description": "name is the resource name of the Consul cluster resource.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ConsulAMAService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "hashicorp.cloud.consulama.ama.ClusterProperties": {
+      "type": "object",
+      "properties": {
+        "ready": {
+          "type": "boolean",
+          "format": "boolean",
+          "description": "ready marks whether the cluster was successfully created."
+        },
+        "storage_account_name": {
+          "type": "string",
+          "description": "storage_account_name is the storage account to use to upload the Consul\nconfiguration and certificates to."
+        },
+        "blob_container_name": {
+          "type": "string",
+          "description": "blob_container_name is the blob container to use to upload the Consul\nconfiguration and certificates to."
+        },
+        "storage_account_resource_group": {
+          "type": "string",
+          "description": "storage_account_resource_group is the resource group of the storage account\nto use to upload the Consul configuration and certificates to."
+        },
+        "location": {
+          "type": "string",
+          "description": "location is the Azure region the Consul cluster is being launched into."
+        },
+        "consul_initial_version": {
+          "type": "string",
+          "description": "consul_initial_version is the initial Consul version to launch the cluster\nwith."
+        },
+        "consul_current_version": {
+          "type": "string",
+          "description": "consul_current_version is the Consul version currently running in the\ncluster."
+        },
+        "consul_datacenter": {
+          "type": "string",
+          "title": "consul_datacenter is the datacenter name to configure the Consul cluster\nas.\nSee: https://www.consul.io/docs/agent/options.html#_datacenter"
+        },
+        "consul_num_servers": {
+          "type": "string",
+          "description": "consul_num_servers is the number of Consul servers to provision."
+        },
+        "consul_automatic_upgrades": {
+          "type": "string",
+          "description": "consul_automatic_upgrades are either 'enabled' or 'disabled'."
+        },
+        "consul_external_endpoint": {
+          "type": "string",
+          "description": "consul_external_endpoint can be 'enabled' or 'disabled'."
+        },
+        "consul_snapshot_interval": {
+          "type": "string",
+          "description": "consul_snapshot_interval is the interval in which to take snapshots."
+        },
+        "consul_snapshot_retention": {
+          "type": "string",
+          "description": "consul_snapshot_retention is the interval for how long to keep snapshots."
+        },
+        "consul_external_endpoint_url": {
+          "type": "string",
+          "description": "consul_external_endpoint_url is the URL under which the Consul UI and API\nare exposed."
+        },
+        "managed_app_id": {
+          "type": "string",
+          "description": "managed_app_id is the Azure Resource Manager ID of the managed app\ninstance. This ID is required to identified managed apps."
+        }
+      },
+      "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
+    },
+    "hashicorp.cloud.consulama.ama.CreateClusterRequest": {
+      "type": "object",
+      "properties": {
+        "subscription_id": {
+          "type": "string",
+          "description": "subscription_id is the ID of the Azure subscription the new Consul\ncluster should be created in. This is the customer's subscription ID.\nPassed in the request path."
+        },
+        "resource_group": {
+          "type": "string",
+          "description": "resource_group is the resource group in which the new Consul cluster\nshould be created. This is the AMA instance's managed resource group.\nPassed in the request path."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the resource name of the new Consul cluster resource.\nPassed in the request path and in the request body."
+        },
+        "properties": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties",
+          "description": "properties are the properties of the new cluster.\nPassed in the request body."
+        },
+        "id": {
+          "type": "string",
+          "description": "id is the Azure resource ID of the new cluster.\nPassed in the request body."
+        },
+        "type": {
+          "type": "string",
+          "description": "type is the Azure resource type of the new cluster.\nPassed in the request body."
+        }
+      },
+      "title": "See ConsulAMAService.CreateCluster"
+    },
+    "hashicorp.cloud.consulama.ama.CreateClusterResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is the complete resource ID as defined in the\nCreateClusterRequest."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the resource name as given by Azure in the\nCreateClusterRequest."
+        },
+        "type": {
+          "type": "string",
+          "description": "type is the resource type as given by Azure in the\nCreateClusterRequest."
+        },
+        "properties": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties",
+          "description": "properties are the properties of the created cluster."
+        }
+      },
+      "title": "See ConsulAMAService.CreateCluster"
+    },
+    "hashicorp.cloud.consulama.ama.GetClusterResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is the complete resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the resource name as given by Azure in the GetClusterRequest."
+        },
+        "type": {
+          "type": "string",
+          "description": "type is the resource type as given by Azure in the GetClusterRequest."
+        },
+        "properties": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties",
+          "description": "properties are the properties of the cluster."
+        }
+      },
+      "title": "See ConsulAMAService.GetCluster"
+    },
+    "hashicorp.cloud.consulama.ama.ListClustersResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/hashicorp.cloud.consulama.ama.GetClusterResponse"
+          },
+          "description": "value is the list of cluster in the format of GetClusterResponses."
+        }
+      },
+      "title": "See ConsulAMAService.ListCluster"
+    },
+    "hashicorp.cloud.consulama.ama.ResourceNotificationError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "code is the error code of the failed operation, e.g.\n\"ResourceGroupDeletionBlocked\""
+        },
+        "message": {
+          "type": "string",
+          "description": "message is a human-readable description of the error."
+        }
+      },
+      "description": "ResourceNotificationError represents an error that happened in Azure when\ninteracting with a managed app instance. It is optionally included in a\nResourceNotificationRequest."
+    },
+    "hashicorp.cloud.consulama.ama.ResourceNotificationRequest": {
+      "type": "object",
+      "properties": {
+        "event_type": {
+          "type": "string",
+          "description": "event_type is the request type that lead to the notification. Can be\n\"PUT\", \"PATCH\" (not observed yet), or \"DELETE\"."
+        },
+        "application_id": {
+          "type": "string",
+          "description": "application_id is the AMA instance's complete ARM ID."
+        },
+        "event_time": {
+          "type": "string",
+          "title": "event_time is the time at which the event occurred.\nFormat: 2006-01-02T15:04:05.999999999Z"
+        },
+        "provisioning_state": {
+          "type": "string",
+          "description": "provisioning_state is the state in which the AMA instance is. Can be\n\"Accepted\",  \"Succeeded\", \"Failed\", \"Deleting\", or \"Deleted\"."
+        },
+        "application_definition_id": {
+          "type": "string",
+          "description": "application_definition_id is the complete ARM ID of the AMA instance's\napplication definition."
+        },
+        "error": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ResourceNotificationError",
+          "description": "error is added in case provosioning_state is \"Failed\" and describes the\nerror that lead to this condition."
+        }
+      },
+      "title": "See ConsulAMAService.ResourceNotification"
+    },
+    "hashicorp.cloud.consulama.ama.TrackClusterCreationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id is the complete resource ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the resource name as given by Azure in the GetClusterRequest."
+        },
+        "type": {
+          "type": "string",
+          "description": "type is the resource type as given by Azure in the GetClusterRequest."
+        },
+        "properties": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties",
+          "description": "properties are the properties of the cluster."
+        }
+      },
+      "title": "See ConsulAMAService.TrackClusterCreation"
+    }
+  }
+}
