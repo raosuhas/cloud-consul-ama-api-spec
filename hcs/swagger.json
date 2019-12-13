@@ -160,7 +160,7 @@
         "description": "see https://docs.microsoft.com/en-us/azure/managed-applications/custom-providers-overview",
         "operationId": "CreateCluster",
         "responses": {
-          "200": {
+          "202": {
             "description": "A successful response.",
             "schema": {
               "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterResponse"
