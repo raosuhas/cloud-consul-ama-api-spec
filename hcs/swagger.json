@@ -435,9 +435,9 @@
     "hashicorp.cloud.consulama.ama.ClusterProperties": {
       "type": "object",
       "properties": {
-        "ready": {
-          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties.ClusterReady",
-          "description": "ready marks whether the cluster was successfully created."
+        "state": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterState",
+          "description": "state is the cluster's current state."
         },
         "storageAccountName": {
           "type": "string",
@@ -498,15 +498,6 @@
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
     },
-    "hashicorp.cloud.consulama.ama.ClusterProperties.ClusterReady": {
-      "type": "string",
-      "enum": [
-        "NOT_READY",
-        "READY"
-      ],
-      "default": "NOT_READY",
-      "description": "ClusterReady is used to indicate whether a cluster is completely\nprovisioned and is ready to use.\n\n - NOT_READY: NOT_READY indicates that the cluster is not yet ready to use.\n - READY: READY indicates that the cluster is ready to use."
-    },
     "hashicorp.cloud.consulama.ama.ClusterResponse": {
       "type": "object",
       "properties": {
@@ -532,6 +523,19 @@
       },
       "description": "See ConsulAMAService.GetCluster, ConsulAMAService.CreateCluster, and\nConsulAMAService.TrackClusterCreation.",
       "x-ms-azure-resource": true
+    },
+    "hashicorp.cloud.consulama.ama.ClusterState": {
+      "type": "string",
+      "enum": [
+        "UNSET",
+        "PENDING",
+        "CREATING",
+        "RUNNING",
+        "FAILED",
+        "DELETING"
+      ],
+      "default": "UNSET",
+      "description": "ClusterState describes the current state a cluster is in. There is no DELETED\nstate because after deletion clusters do not exist anymore and requests to\nretrieve them are responded to with not-found errors."
     },
     "hashicorp.cloud.consulama.ama.CreateClusterRequest": {
       "type": "object",
