@@ -130,6 +130,12 @@
               "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterResponse"
             }
           },
+          "202": {
+            "description": "Returned when the cluster creation is still ongoing.",
+            "schema": {
+              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterResponse"
+            }
+          },
           "400": {
             "description": "Returned when the request contained invalid data.",
             "schema": {
@@ -316,76 +322,6 @@
           "ConsulAMAService"
         ]
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.CustomProviders/resourceProviders/public/consulClusters/{name}/creation": {
-      "get": {
-        "summary": "TrackClusterCreation is an API endpoint called by Azure after requesting\nthe creation of a new Consul cluster (see CreateCluster) to determine\nthe status of the create operation.\nThis URI of this endpoint is returned with the ClusterResponse.\nBased on the status of the operation creating the HVN and cluster, this\nendpoint needs to return HTTP 202 to indicate that the operation is still\nrunning or HTTP 200 if it is done.",
-        "operationId": "TrackClusterCreation",
-        "responses": {
-          "200": {
-            "description": "Returned when the cluster creation was completed.",
-            "schema": {
-              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterResponse"
-            }
-          },
-          "202": {
-            "description": "Returned when the cluster creation is still ongoing.",
-            "schema": {
-              "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterResponse"
-            }
-          },
-          "400": {
-            "description": "Returned when the request contained invalid data.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          },
-          "401": {
-            "description": "Returned when the request did not contain a valid client certificate.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          },
-          "404": {
-            "description": "Returned when the requested managed app or cluster does not exist.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          },
-          "500": {
-            "description": "Returned when there was an internal error.",
-            "schema": {
-              "$ref": "#/definitions/google.rpc.Status"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "description": "subscription_id is the ID of the Azure subscription the Consul cluster\nexists in. This is the customer's subscription ID.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "description": "resource_group is the resource group into which the Consul cluster is\nbeing deployed. This is the AMA instance's managed resource group.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "description": "name is the resource name of the Consul cluster resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ConsulAMAService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -529,7 +465,7 @@
           "description": "properties are the properties of the cluster."
         }
       },
-      "description": "See ConsulAMAService.GetCluster, ConsulAMAService.CreateCluster, and\nConsulAMAService.TrackClusterCreation.",
+      "description": "See ConsulAMAService.GetCluster, ConsulAMAService.CreateCluster.",
       "x-ms-azure-resource": true
     },
     "hashicorp.cloud.consulama.ama.ClusterState": {
