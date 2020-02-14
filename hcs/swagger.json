@@ -373,7 +373,7 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterState",
-          "description": "state is the cluster's current state."
+          "description": "state is the cluster's current state.\nThis is used in HTTP responses to Azure, but when this pb message is used\nto persist cluster data in the DB, this attribute is either ignored or\nstored with its default value of UNSET."
         },
         "storageAccountName": {
           "type": "string",
@@ -442,6 +442,10 @@
         "consulConnect": {
           "type": "string",
           "title": "consul_connect is a toggle for enabling or disabling Consul Connect"
+        },
+        "consulVnetCidr": {
+          "type": "string",
+          "description": "consul_vnet_cidr is a VNet CIDR block."
         }
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
@@ -483,7 +487,7 @@
         "DELETING"
       ],
       "default": "UNSET",
-      "description": "ClusterState describes the current state a cluster is in. There is no DELETED\nstate because after deletion clusters do not exist anymore and requests to\nretrieve them are responded to with not-found errors."
+      "description": "ClusterState describes the current state a cluster is in. There is no DELETED\nstate because after deletion clusters do not exist anymore and requests to\nretrieve them are responded to with not-found errors.\n\nThese values are specific to our comminication with Azure, and they're not backed\nby our persistence layer. When the consul-ama service has to produce a cluster\nstate to respond to a request from Azure, it reads the state from the consul-service\nand then translates the state value to one compatible with this enum."
     },
     "hashicorp.cloud.consulama.ama.CreateClusterRequest": {
       "type": "object",
