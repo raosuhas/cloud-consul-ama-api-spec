@@ -438,6 +438,14 @@
         "consulCaFile": {
           "type": "string",
           "title": "consul_ca_file is a base64-encoded ca chain file in PEM format that\nshould be used by the client agent to verify the authenticity of the\nserver"
+        },
+        "consulVnetCidr": {
+          "type": "string",
+          "title": "consul_vnet_cidr is a foo"
+        },
+        "consulConnect": {
+          "type": "string",
+          "title": "consul_connect is a foo"
         }
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
