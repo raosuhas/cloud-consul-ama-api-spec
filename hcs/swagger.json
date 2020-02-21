@@ -438,14 +438,80 @@
         "consulCaFile": {
           "type": "string",
           "title": "consul_ca_file is a base64-encoded ca chain file in PEM format that\nshould be used by the client agent to verify the authenticity of the\nserver"
+        }
+      },
+      "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
+    },
+    "hashicorp.cloud.consulama.ama.ClusterPropertiesResponse": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterState",
+          "description": "state is the cluster's current state.\nThis is used in HTTP responses to Azure, but when this pb message is used\nto persist cluster data in the DB, this attribute is either ignored or\nstored with its default value of UNSET."
         },
-        "consulConnect": {
+        "storageAccountName": {
           "type": "string",
-          "title": "consul_connect is a toggle for enabling or disabling Consul Connect"
+          "description": "storage_account_name is the storage account to use to upload the Consul\nconfiguration and certificates to."
         },
-        "consulVnetCidr": {
+        "blobContainerName": {
           "type": "string",
-          "description": "consul_vnet_cidr is a VNet CIDR block."
+          "description": "blob_container_name is the blob container to use to upload the Consul\nconfiguration and certificates to."
+        },
+        "storageAccountResourceGroup": {
+          "type": "string",
+          "description": "storage_account_resource_group is the resource group of the storage account\nto use to upload the Consul configuration and certificates to."
+        },
+        "location": {
+          "type": "string",
+          "description": "location is the Azure region the Consul cluster is being launched into."
+        },
+        "consulInitialVersion": {
+          "type": "string",
+          "description": "consul_initial_version is the initial Consul version to launch the cluster\nwith."
+        },
+        "consulCurrentVersion": {
+          "type": "string",
+          "description": "consul_current_version is the Consul version currently running in the\ncluster."
+        },
+        "consulDatacenter": {
+          "type": "string",
+          "title": "consul_datacenter is the datacenter name to configure the Consul cluster\nas.\nSee: https://www.consul.io/docs/agent/options.html#_datacenter"
+        },
+        "consulNumServers": {
+          "type": "string",
+          "description": "consul_num_servers is the number of Consul servers to provision."
+        },
+        "consulAutomaticUpgrades": {
+          "type": "string",
+          "description": "consul_automatic_upgrades are either 'enabled' or 'disabled'."
+        },
+        "consulExternalEndpoint": {
+          "type": "string",
+          "description": "consul_external_endpoint can be 'enabled' or 'disabled'."
+        },
+        "consulSnapshotInterval": {
+          "type": "string",
+          "description": "consul_snapshot_interval is the interval in which to take snapshots."
+        },
+        "consulSnapshotRetention": {
+          "type": "string",
+          "description": "consul_snapshot_retention is the interval for how long to keep snapshots."
+        },
+        "consulExternalEndpointUrl": {
+          "type": "string",
+          "description": "consul_external_endpoint_url is the URL under which the Consul UI and API\nare exposed."
+        },
+        "managedAppId": {
+          "type": "string",
+          "description": "managed_app_id is the Azure Resource Manager ID of the managed app\ninstance. This ID is required to identified managed apps."
+        },
+        "consulConfigFile": {
+          "type": "string",
+          "description": "consul_config_file is a base64-encoded JSON config file for a Consul\nagent running in client mode."
+        },
+        "consulCaFile": {
+          "type": "string",
+          "title": "consul_ca_file is a base64-encoded ca chain file in PEM format that\nshould be used by the client agent to verify the authenticity of the\nserver"
         }
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
@@ -469,7 +535,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterProperties",
+          "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterPropertiesResponse",
           "description": "properties are the properties of the cluster."
         }
       },
