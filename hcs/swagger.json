@@ -3,7 +3,7 @@
   "info": {
     "title": "HashiCorp Consul Service (HCS)",
     "description": "Azure Managed App API for HCS",
-    "version": "2020-03-11"
+    "version": "2020-03-12"
   },
   "schemes": [
     "https"
@@ -442,6 +442,10 @@
         "consulConnect": {
           "type": "string",
           "title": "consul_connect toggles the Consul Connect feature"
+        },
+        "consulVnetCidr": {
+          "type": "string",
+          "title": "consul_vnet_cidr is the the VNet CIDR block range of the Consul cluster."
         }
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
