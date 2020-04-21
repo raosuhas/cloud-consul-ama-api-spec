@@ -459,6 +459,10 @@
         "consulClusterMode": {
           "$ref": "#/definitions/hashicorp.cloud.consulama.ama.ClusterMode",
           "description": "ClusterMode defines the purpose of the cluster, it can override\nother cluster definitions (e.g. development will always have 1 node only)."
+        },
+        "consulPrivateEndpointUrl": {
+          "type": "string",
+          "description": "consul_private_endpoint_url is the URL under which the Consul UI and API\nare exposed on a private network. This is only accessible from a VNET\nthat is peered to the managed app's VNET."
         }
       },
       "description": "ClusterProperties contains properties the user selected when creating the\nmanaged app instance."
