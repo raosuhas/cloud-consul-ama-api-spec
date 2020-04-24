@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HashiCorp Consul Service (HCS)",
+    "title": "HashiCorp Consul Service Test",
     "description": "Azure Managed App API for HCS",
     "version": "2020-04-02"
   },
@@ -21,7 +21,7 @@
         "operationId": "ResourceNotification",
         "responses": {
           "200": {
-            "description": "Returned when the notification was handled successfully.",
+            "description": "Returned when the notification was handledss successfully.",
             "schema": {
               "$ref": "#/definitions/google.protobuf.Empty"
             }
