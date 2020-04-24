@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HashiCorp Consul Service Test",
+    "title": "HashiCorp Consul Service Test Again",
     "description": "Azure Managed App API for HCS",
     "version": "2020-04-02"
   },
